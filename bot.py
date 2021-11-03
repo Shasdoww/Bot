@@ -1,8 +1,14 @@
 import sys
+import os
 
+# Keep alive
+from keep_alive import keep_alive
+# Bot items
 import settings
 import discord
 import message_handler
+# Interactive pages and help
+from discord_interactive import Page, Help
 
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from events.base_event              import BaseEvent
@@ -74,7 +80,9 @@ def main():
         await common_handle_message(after)
 
     # Finally, set the bot running
-    client.run(settings.BOT_TOKEN)
+    keep_alive()
+    token = os.environ['TOKEN']
+    client.run(token)
 
 ###############################################################################
 
